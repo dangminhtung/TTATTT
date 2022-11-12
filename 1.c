@@ -13,7 +13,7 @@ bool check(int n)
     return d == 4;
 }
 int main()
-{
+{P
     int n;
     do
 
