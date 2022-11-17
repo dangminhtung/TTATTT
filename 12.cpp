@@ -3,6 +3,7 @@
 // Bài này lừa đấy, chỉ có 1 dãy số thỏa mãn thôi nhé, klaim đi nếu bấm 10000 k ra nhiều
 int main()
 {
+    
     int n,i,j,p,t,Tong,check,k;
     j=0;
     check=1;

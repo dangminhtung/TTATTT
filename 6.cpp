@@ -9,6 +9,7 @@ int main()
 	{
 		p = q = 0;
 		N = j;
+		// tìm ước chung của n trước , rồi từ tìm ước của  ước chung  của n xem dó bằng n ko
 
 		for (i = 1; i < N; i++)
 		{

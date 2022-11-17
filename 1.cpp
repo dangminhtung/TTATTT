@@ -13,22 +13,22 @@ bool check(int n)
     return d == 4;
 }
 int main()
-{P
+{
     int n;
     do
 
     {
-    do
-    {
-        printf("Enter the N: ");
-        scanf("%d", &n);
-    } while (n < 0);
-    do
-
-    {
-    {
-        if (check(i))
-            printf("%d is Q-Prime.\n", i);
+        do
+        {
+            printf("Enter the N: ");
+            scanf("%d", &n);
+        } while (n < 0);
+        {
+            {
+                if (check(i))
+                    printf("%d is Q-Prime.\n", i);
+            }
+            return 0;
+        }
     }
-    return 0;
 }
