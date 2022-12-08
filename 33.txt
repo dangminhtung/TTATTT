@@ -103,7 +103,7 @@ int main()
 				}
 			}
 
-		if ((qt + xat) >= gt) // Dit con me ham so sanh
+		if ((qt + xat) >= gt) // ham so sanh
 		{
 			ct = qt + xat;
 			for (i = ct; i >= gt; i--)
@@ -154,7 +154,7 @@ int main()
 				}
 			}
 
-		if ((qt + yat) >= gt) // Dit con me ham so sanh
+		if ((qt + yat) >= gt) // ham so sanh
 		{
 			ct = qt + yat;
 			for (i = ct; i >= gt; i--)

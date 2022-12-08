@@ -15,20 +15,18 @@ bool check(int n)
 int main()
 {
     int n;
-    do
 
+    do
     {
-        do
-        {
-            printf("Enter the N: ");
-            scanf("%d", &n);
-        } while (n < 0);
-        {
-            {
-                if (check(i))
-                    printf("%d is Q-Prime.\n", i);
-            }
-            return 0;
-        }
+        printf("Enter the N: ");
+        scanf("%d", &n);
+    } while (n < 0);
+
+    if (check(n))
+        printf("%d is Q-Prime.\n", n);
+    else
+    {
+        printf("%d khong phai la so Q-prime", n);
     }
+    return 0;
 }
