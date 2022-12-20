@@ -31,7 +31,6 @@ int main()
             {
                 if (check(j))
                 {
-
                     tong = i + j;
                     hieu = abs(i - j);
                     if (check(tong) && check(hieu))

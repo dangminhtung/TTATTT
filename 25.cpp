@@ -35,10 +35,6 @@ int main()
             j++;
         }
     }
-    // for (int i = 0; i < j; i++)
-    // {
-    //     cout << "a[" << i << "]= " << a[i] << endl;
-    // }
     for (int i = 0; i < j; i++)
     {
         sum = 0;

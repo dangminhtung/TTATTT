@@ -16,19 +16,20 @@ bool check(int n)
 }
 int main()
 {
-    int n;
-
-    do
+    int n, t = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
     {
-        printf("Enter the N: ");
-        scanf("%d", &n);
-    } while (n < 0);
-
-    if (check(n))
-        printf("%d is Q-Prime.\n", n);
-    else
-    {
-        printf("%d khong phai la so Q-prime", n);
+        if (check(i))
+        {
+            t = 1;
+            cout << i << endl;
+        }
     }
+    if (t == 0)
+    {
+        cout << "No";
+    }
+
     return 0;
 }

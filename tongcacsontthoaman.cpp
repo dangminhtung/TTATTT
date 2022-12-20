@@ -1,8 +1,6 @@
-// cách 2 nhưng time chạy lâu hơn nhưng có thể chạy được dãy số dài hơn
-#include <math.h>
 #include <iostream>
+#include <cmath>
 using namespace std;
-
 bool check(unsigned long long int n)
 {
     if (n <= 1)
@@ -23,16 +21,15 @@ bool check(unsigned long long int n)
 
 int main()
 {
-    long long int n;
+    unsigned long long int n;
     cin >> n;
-    long long int s, e;
-    s = pow(10, n - 1);
-    e = pow(10, n) - 1;
-    for (long long int i = s; i < e; i++)
+    unsigned long long int sum = 0;
+    for (long long int i = 2; i <= n; i++)
     {
-        if (check(i) == 1)
+        if (check(i))
         {
-            cout << i << ".0" << endl;
+            sum += i;
         }
     }
+    cout << sum;
 }

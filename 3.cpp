@@ -19,7 +19,6 @@ int check(int n)
 int main()
 {
     int n;
-    printf("nhap n:");
     scanf("%d", &n);
     int s = 0, p = 0;
     int k = 0, q = 0;
@@ -31,12 +30,11 @@ int main()
             s++;
             if (check(i) == 1)
             {
-                printf("so nguyen to %d", i);
                 q = q + i;
                 k++;
             }
         }
     }
     int tong = n + p + s - q - k;
-    printf("tong %d", tong);
+    printf("%d", tong);
 }

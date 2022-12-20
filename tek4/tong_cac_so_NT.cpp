@@ -23,16 +23,12 @@ bool check(unsigned long long int n)
 
 int main()
 {
-    long long int n;
-    cin >> n;
-    long long int s, e;
-    s = pow(10, n - 1);
-    e = pow(10, n) - 1;
-    for (long long int i = s; i < e; i++)
+    long long int a, b, s = 0;
+    cin >> a >> b;
+    for (long long int i = a; i <= b; i++)
     {
-        if (check(i) == 1)
-        {
-            cout << i << ".0" << endl;
-        }
+        if (check(i))
+            s += i;
     }
+    cout << s;
 }

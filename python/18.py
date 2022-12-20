@@ -12,6 +12,6 @@ def tinhmang(w, t, a):
 
 
 a = int(input("nhap a: "))
-tp = [tinhmang(8, 4, a)]
+tp = tinhmang(8, 4, a)
 for i in range(3, -1, -1):
     print(tp[i])

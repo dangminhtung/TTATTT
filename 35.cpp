@@ -36,12 +36,12 @@ int main()
     int n;
     cout << "nhap n la so le >1:  ";
     cin >> n;
-    while (n < 2 || n % 2 == 0)
-    {
-        cout << "loi nhap lai!" << endl;
-        cout << "nhap n la so le >1:  ";
-        cin >> n;
-    }
+    // while (n < 2 || n % 2 == 0)
+    // {
+    // cout << "loi nhap lai!" << endl;
+    // cout << "nhap n la so le >1:  ";
+    // cin >> n;
+    // }
     int s;
     int r = n - 1;
     while (r > 0)
@@ -68,5 +68,14 @@ int main()
     else
     {
         cout << "hop so";
+    }
+    int e;
+    cin >> e;
+    for (int i = 2; i <= e; i++)
+    {
+        if (check_miller_rabin(i, y, s) == 1)
+        {
+            cout << i << " ";
+        }
     }
 }

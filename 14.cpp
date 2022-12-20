@@ -37,7 +37,8 @@ int main()
 			{
 				if (z * z * z == daoNguoc)
 				{
-					printf("Vay so can tim la %d va lap phuong cua no la: %d", i, daoNguoc);
+					// printf("Vay so can tim la %d va lap phuong cua no la: %d", i, daoNguoc);
+					printf("%d", i);
 				}
 			}
 		}

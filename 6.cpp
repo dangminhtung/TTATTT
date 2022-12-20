@@ -28,6 +28,6 @@ int main()
 		}
 
 		if (q == N && p != q)
-			printf("Cap so do la: %d  %d\n", N, p);
+			printf(" %d  %d\n", N, p);
 	}
 }
