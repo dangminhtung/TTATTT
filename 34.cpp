@@ -20,7 +20,7 @@ int main()
     int check;
     cout << "nhap so muon kiem tra:";
     cin >> n;
-    cout << "so la muon lap :" << endl;
+    cout << "so la muon lap : " << endl;
     cin >> check;
     int a;
     for (int i = 0; i < check; i++)

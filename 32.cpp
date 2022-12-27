@@ -1,110 +1,170 @@
-#include <iostream>
+#include <stdio.h>
 #include <math.h>
-using namespace std;
-int gcd(int a, int b)
+#include <stdlib.h>
+#include <time.h>
+
+long long int nhanbpcolap(long long int A, long long int n, long long int p)
 {
-    if (a == 0 || b == 0)
+    int i = 0;
+    long long int b = 1;
+    int Arr[100];
+    while (n > 0)
     {
-        return a + b;
-    }
-    while (a != b)
-    {
-        if (a > b)
-            a -= b;
+        if (n & 1)
+        {
+            Arr[i++] = 1;
+        }
+
         else
-            b -= a;
+        {
+            Arr[i++] = 0;
+        }
+        n >>= 1;
     }
-    return a;
+    if (Arr[0] == 1)
+        b = A;
+    for (int j = 1; j < i; j++)
+    {
+
+        A = A * A % p;
+        if (Arr[j])
+        {
+            b = A * b % p;
+        }
+    }
+    return b;
 }
-int check(int n)
+
+int get_a(int n)
 {
-    if (n < 2)
-    {
-        return false;
-    }
-    for (int i = 2; i <= sqrt(n); i++)
-    {
-        if (n % i == 0)
-            return false;
-    }
-    return true;
+    return 2 + rand() % (n - 3);
 }
-int EuclidExtended(int e, int phi)
+int miller_rabin(int n)
 {
-    int x, y, x1 = 0, x2 = 1, y1 = 1, y2 = 0;
-    int r, q;
-    while (e > 0)
+    if (n % 2 == 0)
+        return 0;
+    int r = n - 1;
+    int s = 0;
+    while (!(r & 1))
     {
-        q = phi / e;
-        r = phi % e;
+        r >>= 1;
+        s++;
+    }
+    int a = 0;
+    a = get_a(n);
+    int b, y;
+    b = nhanbpcolap(a, r, n);
+    if (b - 1 == 0 || b + 1 == n)
+        return 1;
+    for (int j = 0; j <= s - 1; j++)
+    {
+        b = b * b % n;
+        if (b + 1 == n)
+            return 1;
+    }
+    return 0;
+}
+int MR_t(int n, int t)
+{
+    if (n <= 1)
+        return 0;
+    if (n == 2 || n == 3)
+        return 1;
+    if (n % 2 == 0 || n % 3 == 0)
+        return 0;
+    for (int i = 1; i <= t; i++)
+    {
+        if (miller_rabin(n) == 0)
+            return 0;
+    }
+    return 1;
+}
+
+int inverse(int a, int b)
+{
+    int d, q, r, x, y, x2, x1, y2, y1, temp;
+    int preb = b;
+    if (a < b)
+    {
+        temp = a;
+        a = b;
+        b = temp;
+    }
+    if (b == 0)
+    {
+        d = a;
+        x = 1;
+        y = 0;
+    }
+    x2 = 1;
+    x1 = 0;
+    y2 = 0;
+    y1 = 1;
+    while (b > 0)
+    {
+        q = a / b;
+        r = a % b;
         x = x2 - q * x1;
         y = y2 - q * y1;
-        phi = e;
-        e = r;
+        a = b;
+        b = r;
         x2 = x1;
-        y2 = y1;
         x1 = x;
+        y2 = y1;
         y1 = y;
     }
-    return y2;
+    d = a;
+    x = x2;
+    y = y2;
+    if (y < 0)
+        y = y + preb;
+    return y;
 }
-int power(int x, int y, int mod)
+int gcd(int a, int b)
 {
-    if (y == 0)
-        return 1;
-    int temp = power(x, y / 2, mod) % mod;
-    temp = (temp * temp) % mod;
-    if (y % 2 == 1)
-    {
-        temp = (temp * x) % mod;
-    }
-    return temp;
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
 }
 int main()
 {
-    int p,
-        q;
-    while (p <= 100)
+    int p, q, phi, c;
+    int n;
+    int d;
+    srand(time(0));
+    p = rand() % 400 + 100;
+    q = rand() % 400 + 100;
+    while (!MR_t(p, 3) || !MR_t(q, 3))
     {
-        cout << "Nhap p la so NT: ";
-        cin >> p;
+        if (!MR_t(p, 3))
+            p = rand() % 400 + 100;
+        if (!MR_t(q, 3))
+            q = rand() % 400 + 100;
     }
-    while (q >= 500)
-    {
-        cout << "Nhap q la so NT: ";
-        cin >> q;
-    }
-    int n = p * q;
-    int phiN = (p - 1) * (q - 1);
-    cout << "PhiN :" << phiN << endl;
-    int e;
-    while (1)
-    {
-        cout << "chon e thoa man e va phiN  la NT cung nhau: ";
-        cin >> e;
-        if (gcd(e, phiN) == 1)
-        {
-            break;
-        }
-        else
-            cout << "ko thoa man thu lai!" << endl;
-    }
-    // tìm d(nếu d là âm thì cộng thêm với phiN để ra số dương)
-    int d = EuclidExtended(e, phiN);
-    if (d < 0)
-        d = d + phiN;
-    cout << "d= " << d << endl;
-
-    int sbd;
+    printf("p = %d ,q = %d\n", p, q);
+    n = p * q;
+    phi = (p - 1) * (q - 1);
+    printf("n = %d , phi = %d\n", n, phi);
     int m;
-    cout << "nhap SBD: ";
-    cin >> sbd;
-
-    m = sbd + 123;
-
-    cout << "ban ma M luc dau: " << m << endl;
-    int c = power(m, e, n);
-    cout << "ma hoa: " << c << endl;
-    int temp = power(c, d, n);
-    cout << "giai ma: " << temp;
+    printf("nhap ma sinh vien: ");
+    scanf("%d", &m);
+    m = m + 123;
+    int e = rand() % (phi - 1) + 1;
+    while (gcd(e, phi) != 1)
+        e = rand() % (phi - 1) + 1;
+    printf("Plaintext : %d\n", m);
+    printf("e  = %d\n", e);
+    printf("%d^%d mod %d\n", m, e, n);
+    if (m > n)
+    {
+        printf("%d^%d mod %d\n", m % n, e, n);
+    }
+    c = nhanbpcolap(m, e, n);
+    if (c < 0)
+        c += n;
+    printf("Ciphertext: %d\n", c);
+    d = inverse(e, phi);
+    printf("d = %d\n", d);
+    int plaintext = nhanbpcolap(c, d, n);
+    printf("Decode: %d\n", plaintext);
 }
