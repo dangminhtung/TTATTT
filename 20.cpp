@@ -23,8 +23,7 @@ int gcd(int a, int b)
 }
 int main()
 {
-	int test = gcd(96, 72);
-	cout << test;
+
 	int m, n, d, uoc;
 	cout << "nhap m, n: ";
 	cin >> m >> n;

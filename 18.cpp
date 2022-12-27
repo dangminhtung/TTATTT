@@ -3,29 +3,13 @@
 using namespace std;
 int *tinhmang(int w, int t, int a)
 {
+    int j = 1;
     int *temp = new int[3]();
-    int surplus;
     for (int i = 3; i > -1; i--)
     {
-        if (i == 3)
-        {
-            temp[3] = a / (powf(2, (t - 1) * w));
-            surplus = a % (int)(powf(2, (t - 1) * w));
-        }
-        else if (i == 2)
-        {
-            temp[2] = surplus / powf(2, 2 * w);
-            surplus = surplus % (int)powf(2, 2 * w);
-        }
-        else if (i == 1)
-        {
-            temp[1] = surplus / powf(2, w);
-            surplus = surplus % (int)powf(2, w);
-        }
-        else
-        {
-            temp[0] = surplus;
-        }
+        temp[i] = a / powf(2, (t - j) * w);
+        a = a % (int)powf(2, (t - j) * w);
+        j++;
     }
     return temp;
 }

@@ -18,7 +18,7 @@ int main()
 {
     int n;
     int check;
-    cout << "nhap so muon kiem tra: ";
+    cout << "nhap so muon kiem tra:";
     cin >> n;
     cout << "so la muon lap :" << endl;
     cin >> check;

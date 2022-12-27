@@ -1,32 +1,61 @@
 #include <iostream>
 #include <math.h>
 using namespace std;
-bool check(int n)
+void sangNT_NguyenThuy(int arr[10000], int n)
 {
-	if (n < 2)
+
+	int i, j;
+	for (i = 2; i < n; i++)
+		arr[i] = 1;
+	arr[0] = arr[1] = 0;
+	j = 2;
+	while (2 * j < n)
 	{
-		return false;
+		arr[2 * j]--;
+		j++;
 	}
-	for (int i = 2; i <= sqrt(n); i++)
+	j = 3;
+	while (3 * j < n)
 	{
-		if (n % i == 0)
+		arr[3 * j]--;
+		j += 2;
+	}
+	for (i = 5; i < sqrt(n); i = i + 6)
+	{
+		if (arr[i] == 1)
 		{
-			return false;
+			j = 5;
+			while (i * j < n)
+			{
+				arr[i * j]--;
+				arr[i * (j + 2)]--;
+				j += 6;
+			}
+		}
+		if (arr[i + 2] == 1)
+		{
+			j = 5;
+			while ((i + 2) * j < n)
+			{
+				arr[(i + 2) * j]--;
+				arr[(i + 2) * (j + 2)]--;
+				j += 6;
+			}
 		}
 	}
-	return true;
 }
 int main()
 {
-	int n, a, b, c, tong;
+	int n, a, b, c, tong, arr[10000];
 	cout << "nhap n: ";
 	cin >> n;
 	cout << "nhap a, b, c:";
 	cin >> a >> b >> c;
+	sangNT_NguyenThuy(arr, n);
 	for (int i = 1; i < n; i++)
 	{
 		tong = a * i * i + b * i + c;
-		if (check(tong))
+		if (arr[tong] == 1)
 		{
 			cout << "so nguyen  x la: " << i;
 			break;

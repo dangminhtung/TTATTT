@@ -2,20 +2,48 @@
 #include <math.h>
 using namespace std;
 
-bool check(int n)
+void check(int arr[10000], int n)
 {
-	if (n < 2)
+
+	int i, j;
+	for (i = 2; i < n; i++)
+		arr[i] = 1;
+	arr[0] = arr[1] = 0;
+	j = 2;
+	while (2 * j < n)
 	{
-		return false;
+		arr[2 * j]--;
+		j++;
 	}
-	for (int i = 2; i <= sqrt(n); i++)
+	j = 3;
+	while (3 * j < n)
 	{
-		if (n % i == 0)
+		arr[3 * j]--;
+		j += 2;
+	}
+	for (i = 5; i < sqrt(n); i = i + 6)
+	{
+		if (arr[i] == 1)
 		{
-			return false;
+			j = 5;
+			while (i * j < n)
+			{
+				arr[i * j]--;
+				arr[i * (j + 2)]--;
+				j += 6;
+			}
+		}
+		if (arr[i + 2] == 1)
+		{
+			j = 5;
+			while ((i + 2) * j < n)
+			{
+				arr[(i + 2) * j]--;
+				arr[(i + 2) * (j + 2)]--;
+				j += 6;
+			}
 		}
 	}
-	return true;
 }
 int power(int x, int y, int mod)
 {
@@ -33,7 +61,7 @@ int power(int x, int y, int mod)
 int main()
 {
 	int tren = 0, duoi = 0;
-	int n, a;
+	int n, a, arr[10000];
 
 	cout << "nhap N: ";
 	cin >> n;
@@ -41,9 +69,10 @@ int main()
 	cin >> a;
 	int temp1 = n;
 	int temp2 = n;
-	if (check(n))
+	check(arr, n);
+	if (arr[n] == 1)
 	{
-		cout << "true";
+		cout << "true" << endl;
 	}
 	else
 	{
@@ -52,14 +81,14 @@ int main()
 		{
 			temp1++;
 			tren++;
-			if (check(temp1))
+			if (arr[temp1])
 				break;
 		}
 		while (1)
 		{
 			temp2--;
 			duoi++;
-			if (check(temp2))
+			if (arr[temp2])
 				break;
 		}
 		if (tren == duoi)
@@ -78,6 +107,6 @@ int main()
 			cout << "so nguyen to lay: " << n << endl;
 		}
 	}
-	int ketqua = power(a, n, 1234);
+	int ketqua = power(a, n, 123456);
 	cout << "ket qua:" << ketqua;
 }

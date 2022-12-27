@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 // Co the tim lap phuong truoc roi check nguoc lai su nguyen to
-// ĐMT: nên thêm 1 hàm check số nguyên tố để làm nhanh hơn
 int reverse(int n)
 {
 	int reNum = n % 10;

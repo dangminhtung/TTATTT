@@ -6,7 +6,7 @@ bool check(unsigned long long int n)
 {
     unsigned long long int d = 2; // Mỗi số có ít nhất là 2 ước : 1 và chính nó
     for (unsigned long long int i = 2; i <= n / 2; i++)
-    { // Giảm thiểu bước nhảy, tự suy luận đi bạn :(
+    {
         if (n % i == 0)
         {
             d++;

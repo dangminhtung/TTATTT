@@ -2,10 +2,9 @@
 #include <math.h>
 int main()
 {
-    int n, i, j, k, flag;
-    printf("\nNhap n: ");
-    scanf("%d", &n);
-    int A[n];
+    long long int n, i, j, k, flag;
+    scanf("%lld", &n);
+    long long int A[n];
     for (i = 4; i < n; i++)
     {
         A[i] = 0;
@@ -25,6 +24,6 @@ int main()
     for (i = 4; i < n; i++)
     {
         if (A[i] == 1)
-            printf(" %d ", i);
+            printf("%lld ", i);
     }
 }

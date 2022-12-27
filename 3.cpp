@@ -1,25 +1,54 @@
 
 #include <stdio.h>
 #include <math.h>
-int check(int n)
+void sangNT_NguyenThuy(int arr[10000], int n)
 {
-    if (n == 1)
+
+    int i, j;
+    for (i = 2; i < n; i++)
+        arr[i] = 1;
+    arr[0] = arr[1] = 0;
+    j = 2;
+    while (2 * j < n)
     {
-        return 0;
+        arr[2 * j]--;
+        j++;
     }
-    for (int i = 2; i <= sqrt(n); i++)
+    j = 3;
+    while (3 * j < n)
     {
-        if (n % i == 0)
+        arr[3 * j]--;
+        j += 2;
+    }
+    for (i = 5; i < sqrt(n); i = i + 6)
+    {
+        if (arr[i] == 1)
         {
-            return 0;
+            j = 5;
+            while (i * j < n)
+            {
+                arr[i * j]--;
+                arr[i * (j + 2)]--;
+                j += 6;
+            }
+        }
+        if (arr[i + 2] == 1)
+        {
+            j = 5;
+            while ((i + 2) * j < n)
+            {
+                arr[(i + 2) * j]--;
+                arr[(i + 2) * (j + 2)]--;
+                j += 6;
+            }
         }
     }
-    return 1;
 }
 int main()
 {
-    int n;
+    int n, arr[10000];
     scanf("%d", &n);
+    sangNT_NguyenThuy(arr, n);
     int s = 0, p = 0;
     int k = 0, q = 0;
     for (int i = 1; i <= n; i++)
@@ -28,7 +57,7 @@ int main()
         {
             p = p + i;
             s++;
-            if (check(i) == 1)
+            if (arr[i] == 1)
             {
                 q = q + i;
                 k++;

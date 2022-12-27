@@ -1,81 +1,72 @@
-#include <iostream>
-#include <math.h>
-using namespace std;
-
-int power(int x, int y, int mod)
+#include <stdio.h>
+int chuyenHeNP(int k, int arr[20])
 {
-    if (y == 0)
-        return 1;
-    int r = power(x, y / 2, mod) % mod;
-    r = (r * r) % mod;
-    if (y % 2 == 1)
+    int i = 0;
+    while (k > 0)
     {
-        r = (r * x) % mod;
+        arr[i] = k % 2;
+        k /= 2;
+        i++;
     }
-    return r;
+    return i;
 }
-int check_miller_rabin(int n, int y, int s)
+long long int TTNhanBPCoLap(int a, int k, long long int n)
 {
-    if (y != 1 && y != n - 1)
+    if (k == 0)
+        return a;
+    long long int b = 1, i, A = a;
+    int arr[20];
+    int k0 = chuyenHeNP(k, arr);
+    if (arr[0] == 1)
+        b = a;
+    for (i = 1; i < k0; i++)
     {
-        int j = 1;
-        while (j < s && y != n - 1)
+        A = A * A % n;
+        if (arr[i] == 1)
+            b = b * A % n;
+    }
+    return b;
+}
+int kiemTraMillerRabin(int n, int t)
+{
+    int s = 0, r = n - 1, i, j, y;
+    while (r % 2 == 0)
+    {
+        r = r / 2;
+        s++;
+    }
+    for (i = 0; i < t; i++)
+    {
+        int a = rand() % (n - 2) + 2;
+        y = TTNhanBPCoLap(a, r, n);
+        if (y != 1 && y != n - 1)
         {
-            y = (y * y) % n;
-            if (y == 1)
+            j = 1;
+            while (j < s && y != n - 1)
+            {
+                y = y * y % n;
+                if (y == 1)
+                    return 0;
+                j++;
+            }
+            if (y != n - 1)
                 return 0;
-            j += 1;
         }
-        if (y != n - 1)
-            return 0;
     }
     return 1;
 }
 int main()
 {
-    int n;
-    cout << "nhap n la so le >1:  ";
-    cin >> n;
-    // while (n < 2 || n % 2 == 0)
-    // {
-    // cout << "loi nhap lai!" << endl;
-    // cout << "nhap n la so le >1:  ";
-    // cin >> n;
-    // }
-    int s;
-    int r = n - 1;
-    while (r > 0)
+    int n = 2, t;
+    while (n < 3 || n % 2 == 0)
     {
-        if (r % 2 == 1)
-        {
-            cout << "s= " << s << " r= " << r << endl;
-            break;
-        }
-        if (r % 2 == 0)
-        {
-            s++;
-            r /= 2;
-        }
+        printf("Nhap so nguyen le n: ");
+        scanf("%d", &n);
     }
-    int a = 2 + rand() % n - 2;
-    cout << "a dc lua chon: " << a << endl;
-    int y = power(a, r, n);
-    cout << "y= " << y << endl;
-    if (check_miller_rabin(n, y, s) == 1)
-    {
-        cout << "nguyen to!";
-    }
+    printf("Nhap t: ");
+    scanf("%d", &t);
+    if (kiemTraMillerRabin(n, t))
+        printf("So nguyen to");
     else
-    {
-        cout << "hop so";
-    }
-    int e;
-    cin >> e;
-    for (int i = 2; i <= e; i++)
-    {
-        if (check_miller_rabin(i, y, s) == 1)
-        {
-            cout << i << " ";
-        }
-    }
+        printf("Hop so");
 }

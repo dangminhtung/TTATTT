@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-// Bài này lừa đấy, chỉ có 1 dãy số thỏa mãn thôi nhé, klaim đi nếu bấm 10000 k ra nhiều
+
 int main()
 {
 

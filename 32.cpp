@@ -64,12 +64,12 @@ int main()
 {
     int p,
         q;
-    while (p <= 100 || !check(p))
+    while (p <= 100)
     {
         cout << "Nhap p la so NT: ";
         cin >> p;
     }
-    while (q >= 500 || !check(q))
+    while (q >= 500)
     {
         cout << "Nhap q la so NT: ";
         cin >> q;

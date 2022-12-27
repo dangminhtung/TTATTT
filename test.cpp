@@ -1,31 +1,50 @@
-#include <stdio.h>
-#include <math.h>
-// chắc tùy máy vì máy mình làm đc 5 là căng, máy bạn mình làm đc tận 10
-int main()
+#include <iostream>
+using namespace std;
+
+void sangNT_NguyenThuy(int arr[10000], int n)
 {
-    int n, i, j, p, t, d;
-    printf("\nNhap n: ");
-    scanf("%d", &n);
-    d = pow(10, n - 1);
-    n = pow(10, n) - 1;
-    int a[n];
-    for (i = d; i <= n; i++)
+
+    int i, j;
+    for (i = 2; i < n; i++)
+        arr[i] = 1;
+    arr[0] = arr[1] = 0;
+    j = 2;
+    while (2 * j < n)
     {
-        a[i] = 1;
+        arr[2 * j]--;
+        j++;
     }
-    for (p = 2; p < n; p++)
+    j = 3;
+    while (3 * j < n)
     {
-        t = n / p;
-        for (i = 2; i <= t; i++)
-            a[p * i] = 0;
+        arr[3 * j]--;
+        j += 2;
     }
-    printf("(");
-    for (i = d; i <= n; i++)
+    for (i = 5; i < sqrt(n); i = i + 6)
     {
-        if (a[i] == 1)
+        if (arr[i] == 1)
         {
-            printf("%d ", i);
+            j = 5;
+            while (i * j < n)
+            {
+                arr[i * j]--;
+                arr[i * (j + 2)]--;
+                j += 6;
+            }
+        }
+        if (arr[i + 2] == 1)
+        {
+            j = 5;
+            while ((i + 2) * j < n)
+            {
+                arr[(i + 2) * j]--;
+                arr[(i + 2) * (j + 2)]--;
+                j += 6;
+            }
         }
     }
-    printf(")");
+}
+int main()
+{
+    sangNT_NguyenThuy();
 }

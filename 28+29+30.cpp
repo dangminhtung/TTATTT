@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 int gcd(int a, int b)
 {
@@ -11,10 +12,6 @@ int gcd(int a, int b)
 
 int power(int x, int y, int mod)
 {
-    // sử dụng thuật toán nhân bình phương
-    // phân tích mũ ra số nhị phân
-    // nhân với chính nó rồi mod
-    // tương ứng với 1 thì nhân thêm với x
     if (y == 0)
         return 1;
     int temp = power(x, y / 2, mod) % mod;
@@ -23,15 +20,28 @@ int power(int x, int y, int mod)
         temp = (temp * x) % mod;
     return temp;
 }
+bool check(int n)
+{
+    if (n < 2)
+        return false;
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+            return false;
+    }
+    return true;
+}
 
 bool isCarmichaelNumber(int n)
 {
+    if (n <= 2)
+        return false;
     for (int b = 2; b < n; b++)
     {
 
         if (gcd(b, n) == 1)
 
-            if (power(b, n - 1, n) != 1)
+            if (power(b, n - 1, n) != 1 || check(n))
                 return false;
     }
     return true;
@@ -39,7 +49,7 @@ bool isCarmichaelNumber(int n)
 
 int main()
 {
-    int n;
+    int n, c = 0, sum = 0;
     cout << "nhap N: ";
     cin >> n;
     cout << "so Carmichael la: ";
@@ -48,10 +58,11 @@ int main()
     {
         if (isCarmichaelNumber(i))
         {
-            cout << i << " ";
-            // count++;
+            cout << i << " " << endl;
+            c++;
+            sum += i;
         }
     }
-    // cout << count;
-    return 0;
+    cout << "so luong: " << c;
+    cout << "tong: " << sum;
 }
